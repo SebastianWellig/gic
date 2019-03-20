@@ -1,0 +1,28 @@
+jobs:
+  - job: 'Test'
+    pool:
+      vmImage: 'Ubuntu-16.04'
+    strategy:
+      matrix:
+        Python27:
+          python.version: '2.7'
+        Python36:
+          python.version: '3.6'
+      maxParallel: 4
+    
+    steps:
+      - task: UsePythonVersion@0
+        inputs:
+          versionSpec: '$(python.version)'
+          architecture: 'x64'
+      
+      - script: python -m pip install --upgrade pip setuptools wheel
+        displayName: 'Installing Python building tools'
+    
+      - script: pip install -r requirements.txt
+        displayName: 'Installing required Python modules'
+
+      - script: |
+          python -m pip install pycodestyle
+          python -m pycodestyle gic
+        displayName: 'Checking PEP8 for Python files with pycodestyle'
