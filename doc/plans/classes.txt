@@ -1,0 +1,21 @@
+ChemObject
+├── name <STRING>
+└── description <STRING>
+
+// A compound has a specific chemical formula with a specific connectivity and spacial arrangement of the substituents
+// A compound can have different electronic structures (multiplicity & excitation) and conformers.
+// Have canonical smiles
+Species(ChemObject)
+├── charge <INT>
+├── formula <STRING>
+├── molecular_weight <FLOAT>
+├── smiles <STRING>
+└── atoms <LIST> of <ATOM>
+
+// A structure is more restricting than a structure in the way that it is a specific conformation and electronic structure.
+Structure(ChemObject)
+├── multiplicity <INT>
+├── formula <STRING>
+└── atoms <LIST> of <ATOM>
+
+
